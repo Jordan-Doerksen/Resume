@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jordan Doerksen | Resume</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --panel: #111823;
+      --panel-2: #0f1520;
+      --text: #e7edf5;
+      --muted: #9aa7b5;
+      --line: #213042;
+      --accent: #7c5cff;
+      --accent-2: #22d3ee;
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(124,92,255,.18), transparent 30%),
+        radial-gradient(circle at top right, rgba(34,211,238,.12), transparent 25%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 32px 20px 64px; }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .brand {
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: .85rem;
+      color: var(--muted);
+    }
+
+    .nav {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .nav a:hover { color: var(--text); }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.4fr .9fr;
+      gap: 24px;
+      align-items: stretch;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-main { padding: 34px; }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent-2);
+      font-size: .9rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      margin-bottom: 14px;
+    }
+
+    .kicker::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent-2);
+      box-shadow: 0 0 18px var(--accent-2);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.5rem, 6vw, 4.8rem);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+    }
+
+    .subtitle {
+      margin: 18px 0 0;
+      max-width: 62ch;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .hero-side {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .contact {
+      display: grid;
+      gap: 14px;
+    }
+
+    .contact-item {
+      padding: 14px 16px;
+      background: var(--panel-2);
+      border: 1px solid rgba(255,255,255,.05);
+      border-radius: 16px;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .contact-item strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 4px;
+      font-size: .88rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .buttons { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    .btn {
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      font-weight: 600;
+      font-size: .95rem;
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #081018;
+      border: none;
+    }
+
+    .section {
+      margin-top: 24px;
+      padding: 30px;
+    }
+
+    .section h2 {
+      margin: 0 0 18px;
+      font-size: 1.25rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .item {
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.02);
+      border: 1px solid rgba(255,255,255,.06);
+    }
+
+    .item h3 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: .92rem;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      margin: 12px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(124,92,255,.12);
+      border: 1px solid rgba(124,92,255,.25);
+      color: var(--text);
+      font-size: .92rem;
+    }
+
+    footer {
+      margin-top: 20px;
+      color: var(--muted);
+      text-align: center;
+      font-size: .92rem;
+    }
+
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+      .topbar { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand">Resume</div>
+      <nav class="nav">
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="card hero-main">
+        <div class="kicker">Jordan Doerksen</div>
+        <h1>Reliable laborer with rail, warehouse, and roofing experience.</h1>
+        <p class="subtitle">
+          Strong safety focus, steady under pressure, and comfortable in fast-paced physical environments.
+          I work well independently, follow procedures, and keep the job moving.
+        </p>
+      </div>
+
+      <aside class="card hero-side" id="contact">
+        <div class="contact">
+          <div class="contact-item">
+            <strong>Location</strong>
+            Winnipeg, MB
+          </div>
+          <div class="contact-item">
+            <strong>Phone</strong>
+            905-259-9235
+          </div>
+          <div class="contact-item">
+            <strong>Email</strong>
+            Doerksen.Jordan@gmail.com
+          </div>
+        </div>
+
+        <div class="buttons">
+          <a class="btn primary" href="mailto:Doerksen.Jordan@gmail.com">Email Me</a>
+          <a class="btn" href="#">Download PDF</a>
+        </div>
+      </aside>
+    </section>
+
+    <section class="card section" id="experience">
+      <h2>Experience</h2>
+      <div class="grid">
+        <article class="item">
+          <h3>Canadian National Railway — Conductor / Engineering Department</h3>
+          <div class="meta">Rail operations and safety-focused work</div>
+          <ul>
+            <li>Worked in rail operations with a focus on safety, teamwork, and procedure.</li>
+            <li>Held conductor and engineering department certifications.</li>
+            <li>Handled responsibilities in a high-pressure, fast-moving environment.</li>
+          </ul>
+        </article>
+
+        <article class="item">
+          <h3>SKP Roofing Inc. — Labourer / Roofer</h3>
+          <div class="meta">Roofing and cladding installation</div>
+          <ul>
+            <li>Assisted with roofing and cladding installation on residential and commercial properties.</li>
+            <li>Worked from instructions and completed tasks with minimal supervision.</li>
+            <li>Kept the work area clean and safe.</li>
+          </ul>
+        </article>
+
+        <article class="item">
+          <h3>Amazon — Fulfillment Associate</h3>
+          <div class="meta">High-volume warehouse operations</div>
+          <ul>
+            <li>Picked and processed orders accurately and efficiently.</li>
+            <li>Used RF headset, IR scanner, pallet jack, and lift truck equipment.</li>
+            <li>Supported productivity goals in a high-volume warehouse environment.</li>
+          </ul>
+        </article>
+
+        <article class="item">
+          <h3>Aimco International — Order Picker / Forklift Driver</h3>
+          <div class="meta">Freight handling and forklift work</div>
+          <ul>
+            <li>Loaded, unloaded, and moved freight and materials.</li>
+            <li>Operated forklifts safely and followed site procedures.</li>
+            <li>Helped keep warehouse operations organized and efficient.</li>
+          </ul>
+        </article>
+
+        <article class="item">
+          <h3>Sobeys Distribution Centre — Order Picker</h3>
+          <div class="meta">Distribution and order fulfillment</div>
+          <ul>
+            <li>Operated warehouse equipment to support package flow and order fulfillment.</li>
+            <li>Worked accurately in a busy distribution setting.</li>
+            <li>Helped meet timing and quality expectations.</li>
+          </ul>
+        </article>
+
+        <article class="item">
+          <h3>Education</h3>
+          <div class="meta">Henry Street High School</div>
+          <ul>
+            <li>High School Diploma</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="card section" id="skills">
+      <h2>Skills</h2>
+      <div class="skills">
+        <span class="tag">Warehouse operations</span>
+        <span class="tag">Forklift use</span>
+        <span class="tag">Pallet jack use</span>
+        <span class="tag">Freight handling</span>
+        <span class="tag">Order picking</span>
+        <span class="tag">Rail operations</span>
+        <span class="tag">Safety procedures</span>
+        <span class="tag">Teamwork</span>
+        <span class="tag">Communication</span>
+        <span class="tag">First Aid</span>
+        <span class="tag">H2S Alive</span>
+        <span class="tag">Class 5 licence</span>
+      </div>
+    </section>
+
+    <footer>
+      Built to be simple, sharp, and easy to update.
+    </footer>
+  </div>
+</body>
+</html>
