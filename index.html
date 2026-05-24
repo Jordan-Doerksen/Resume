@@ -394,17 +394,15 @@
       .topbar { flex-direction: column; align-items: flex-start; }
     }
 
-    /* PDF / print improvements */
-    @page { size: A4; margin: 10mm; }
-
-    @media print, .pdf-mode, .image-capture {
+    /* Print improvements */
+    @media print {
       body {
         background: #ffffff !important;
         color: #0c1220 !important;
         box-shadow: none !important;
       }
 
-      /* force all text and elements to full opacity and dark color for legibility */
+      /* force text to full opacity and dark color for legibility */
       .wrap, .wrap * {
         color: #0c1220 !important;
         background: transparent !important;
@@ -436,36 +434,33 @@
       }
 
       .kicker::before { display: none !important; }
-      .theme-toggle, .nav a.action-btn, .download-btn { display: none !important; }
+      .theme-toggle, .nav a.action-btn { display: none !important; }
 
-      /* image-capture styles: render a higher-contrast light version for PNG exports */
-      .image-capture .wrap {
-        background: #ffffff !important;
-      }
-      .image-capture .card,
-      .image-capture .item,
-      .image-capture .contact-item {
-        background: #ffffff !important;
-        border-color: #d1d5db !important;
+      /* use a reliable, print-friendly font and slightly larger type */
+      body { font-family: Georgia, "Times New Roman", Times, serif !important; font-size: 12pt !important; line-height: 1.5 !important; }
+
+      /* single-column layout for print to avoid layout shifts */
+      .grid { grid-template-columns: 1fr !important; }
+
+      /* avoid breaking inside items and lists */
+      .item, .card, .contact-item, ul { page-break-inside: avoid !important; break-inside: avoid !important; }
+      .item { page-break-after: auto !important; }
+      h2, h3 { page-break-after: avoid !important; page-break-before: avoid !important; }
+
+      /* headings: remove uppercase/letter-spacing and force readable weight/color */
+      .section h2, .item h3 {
+        text-transform: none !important;
+        letter-spacing: normal !important;
         color: #0c1220 !important;
-        box-shadow: none !important;
+        font-weight: 700 !important;
+        font-family: inherit !important;
+        margin-top: 0.2em !important;
+        margin-bottom: 0.4em !important;
       }
-      .image-capture .tag {
-        background: #f8fafc !important;
-        border-color: #cbd5e1 !important;
-        color: #0c1220 !important;
-      }
-      .image-capture h1,
-      .image-capture p,
-      .image-capture .meta,
-      .image-capture ul,
-      .image-capture .section h2,
-      .image-capture .item h3 {
-        color: #0c1220 !important;
-      }
-      .image-capture a {
-        color: #0c1220 !important;
-      }
+
+      /* remove any pseudo-elements near headings */
+      .section h2::before, .section h2::after, .kicker::before { display: none !important; }
+    }
 
       /* use a reliable, print-friendly font and slightly larger type */
       body { font-family: Georgia, "Times New Roman", Times, serif !important; font-size: 12pt !important; line-height: 1.5 !important; }
@@ -511,9 +506,6 @@
         <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
         <a href="#references">References</a>
-        <button class="action-btn download-btn" type="button" id="downloadImageBtn">
-          Download image
-        </button>
         <a href="mailto:Doerksen.Jordan@gmail.com?subject=Let's%20connect" class="action-btn email-btn">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
           Email
@@ -597,8 +589,6 @@
     }
   </script>
 
-  <script src="https://unpkg.com/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-
   <script>
     const body = document.body;
     const toggle = document.getElementById('themeToggle');
@@ -650,42 +640,6 @@
       window.localStorage.setItem('jordan-theme', isLight ? 'light' : 'dark');
       toggle.setAttribute('aria-pressed', isLight ? 'true' : 'false');
     });
-
-    const downloadImageBtn = document.getElementById('downloadImageBtn');
-    if (downloadImageBtn) {
-      downloadImageBtn.addEventListener('click', async () => {
-        downloadImageBtn.disabled = true;
-        const originalText = downloadImageBtn.textContent;
-        downloadImageBtn.textContent = 'Rendering...';
-
-        try {
-          const element = document.querySelector('.wrap');
-          if (!element) throw new Error('Content not found');
-          document.body.classList.add('image-capture');
-          await new Promise(requestAnimationFrame);
-          const canvas = await html2canvas(element, {
-            scale: 2,
-            backgroundColor: null,
-            useCORS: true,
-            logging: false,
-          });
-          document.body.classList.remove('image-capture');
-
-          const link = document.createElement('a');
-          link.href = canvas.toDataURL('image/png');
-          link.download = 'resume.png';
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-        } catch (err) {
-          console.error('Image download failed', err);
-          alert('Unable to generate image. Please try again or open the page in a browser that supports canvas capture.');
-        } finally {
-          downloadImageBtn.disabled = false;
-          downloadImageBtn.textContent = originalText;
-        }
-      });
-    }
 
     // render helpers
     function el(html) {
