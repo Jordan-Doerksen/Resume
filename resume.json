@@ -73,6 +73,12 @@
     "H2S Alive",
     "Class 5 licence"
   ],
+  "interests": [
+    { "title": "Music — Guitar & Composition", "desc": "Write and record music across styles; practiced instrument technique and composition." },
+    { "title": "Coding & Small Projects", "desc": "Experiment with new languages and build compact Python tools for automation and prototyping." },
+    { "title": "3D Modeling & Printing", "desc": "Design and print practical items like self-watering seed starters, desk organizers, and pegboard walls." },
+    { "title": "Hardware Enclosures & Tooling", "desc": "Create custom cases and organizers for Raspberry Pi and audio gear; focus on fit and durability." }
+  ],
   "references": [
     { "name": "Kourtney McBride", "meta": "CN Rail Trainer", "bullets": ["Phone: 587-343-3185"] },
     { "name": "Jason Allen", "meta": "Supervisor, Aimco International", "bullets": ["Phone: 416-846-7067"] }

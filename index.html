@@ -532,6 +532,13 @@
       </div>
     </section>
 
+    <section class="card section" id="interests">
+      <h2>Interests</h2>
+      <div class="grid" id="interestsGrid">
+        <!-- populated by script -->
+      </div>
+    </section>
+
     <footer>
       Looking forward to working with you.
     </footer>
@@ -551,6 +558,7 @@
       renderExperience();
       renderSkills();
       renderReferences();
+      renderInterests();
     }).catch(err => {
       console.error('Failed to load resume.json', err);
     });
@@ -666,6 +674,26 @@
         art.appendChild(h3);
         art.appendChild(meta);
         art.appendChild(ul);
+        grid.appendChild(art);
+      });
+    }
+
+    function renderInterests() {
+      const grid = document.getElementById('interestsGrid');
+      if (!resume.interests) return;
+      grid.innerHTML = '';
+      resume.interests.forEach(i => {
+        const art = document.createElement('article');
+        art.className = 'item';
+        const h3 = document.createElement('h3');
+        h3.textContent = i.title;
+        const meta = document.createElement('div');
+        meta.className = 'meta';
+        meta.textContent = '';
+        const p = document.createElement('p');
+        p.textContent = i.desc;
+        art.appendChild(h3);
+        if (i.desc) art.appendChild(p);
         grid.appendChild(art);
       });
     }
