@@ -402,6 +402,16 @@
         box-shadow: none !important;
       }
 
+      /* force all text and elements to full opacity and dark color for legibility */
+      .wrap, .wrap * {
+        color: #0c1220 !important;
+        background: transparent !important;
+        background-image: none !important;
+        opacity: 1 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
       .wrap {
         max-width: 190mm !important;
         margin: 0 auto !important;
@@ -643,7 +653,7 @@
         margin:       10,
         filename:     'Jordan-Doerksen-Resume.pdf',
         image:        { type: 'jpeg', quality: 1.0 },
-        html2canvas:  { scale: 3, useCORS: true },
+        html2canvas:  { scale: 4, useCORS: true, logging: false, allowTaint: false },
         jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
         pagebreak:    { mode: ['css', 'legacy'] }
       };
