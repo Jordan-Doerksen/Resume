@@ -482,7 +482,9 @@
         <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
         <a href="#references">References</a>
-        <!-- client-side PDF download removed; use server-side generator instead -->
+        <button class="action-btn download-btn" type="button" id="downloadImageBtn">
+          Download image
+        </button>
         <a href="mailto:Doerksen.Jordan@gmail.com?subject=Let's%20connect" class="action-btn email-btn">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
           Email
@@ -566,6 +568,8 @@
     }
   </script>
 
+  <script src="https://unpkg.com/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
   <script>
     const body = document.body;
     const toggle = document.getElementById('themeToggle');
@@ -617,6 +621,39 @@
       window.localStorage.setItem('jordan-theme', isLight ? 'light' : 'dark');
       toggle.setAttribute('aria-pressed', isLight ? 'true' : 'false');
     });
+
+    const downloadImageBtn = document.getElementById('downloadImageBtn');
+    if (downloadImageBtn) {
+      downloadImageBtn.addEventListener('click', async () => {
+        downloadImageBtn.disabled = true;
+        const originalText = downloadImageBtn.textContent;
+        downloadImageBtn.textContent = 'Rendering...';
+
+        try {
+          const element = document.querySelector('.wrap');
+          if (!element) throw new Error('Content not found');
+          const canvas = await html2canvas(element, {
+            scale: 2,
+            backgroundColor: '#0b0f14',
+            useCORS: true,
+            logging: false,
+          });
+
+          const link = document.createElement('a');
+          link.href = canvas.toDataURL('image/png');
+          link.download = 'resume.png';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        } catch (err) {
+          console.error('Image download failed', err);
+          alert('Unable to generate image. Please try again or open the page in a browser that supports canvas capture.');
+        } finally {
+          downloadImageBtn.disabled = false;
+          downloadImageBtn.textContent = originalText;
+        }
+      });
+    }
 
     // render helpers
     function el(html) {
