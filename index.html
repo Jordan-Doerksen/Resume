@@ -1,22 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Tell the browser this is HTML5 and the main language is English.
-       This helps parsing, accessibility, and search engines. -->
   <meta charset="UTF-8" />
-  <!-- Make the layout adapt to phone/desktop widths.
-       Without this, the page would be tiny on mobile. -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jordan Doerksen | Resume</title>
-
   <style>
-    /* -------------------------------------------
-       CSS CUSTOM PROPERTIES (THEME VARIABLES)
-       -------------------------------------------
-       Using :root + CSS variables instead of hard-coded colors
-       makes it easy to switch between dark/light themes
-       by overriding the same variable names.
-    */
     :root {
       --bg: #0b0f14;
       --panel: #111823;
@@ -29,8 +17,6 @@
       --shadow: 0 20px 60px rgba(0,0,0,.35);
     }
 
-    /* Light mode overrides the same variables.
-       We don’t restyle everything; we just change these tokens. */
     body.light {
       --bg: #f5f7fb;
       --panel: #ffffff;
@@ -43,41 +29,27 @@
       --shadow: 0 12px 32px rgba(15,23,42,.12);
     }
 
-    /* Reset box-sizing so padding and borders are included in width/height.
-       This makes layout calculations more intuitive. */
     * { box-sizing: border-box; }
-
-    /* Enable smooth scrolling for in-page links (#experience, etc.). */
     html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
       font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      /* Layered background: 2 radial gradients + solid theme background.
-         This gives a subtle “glow” effect in dark mode. */
       background:
         radial-gradient(circle at top left, rgba(124,92,255,.25), transparent 40%),
         radial-gradient(circle at bottom right, rgba(34,211,238,.15), transparent 35%),
         var(--bg);
       color: var(--text);
       line-height: 1.6;
-      /* Smooth transitions when theme changes. */
       transition: background 0.5s ease, color 0.3s ease;
     }
 
-    /* Basic link reset: inherit color and remove underlines.
-       You rely on hover styles and context instead. */
     a { color: inherit; text-decoration: none; }
-
-    /* Main content wrapper: sets max width and padding. */
     .wrap { max-width: 1100px; margin: 0 auto; padding: 32px 20px 64px; }
 
-    /* -------------------------------------------
-       TOP BAR (BRAND + NAV + THEME TOGGLE)
-       ------------------------------------------- */
     .topbar {
-      display: flex;                     /* horizontal layout */
-      justify-content: space-between;    /* brand left, nav right */
+      display: flex;
+      justify-content: space-between;
       align-items: center;
       gap: 16px;
       margin-bottom: 32px;
@@ -94,7 +66,7 @@
     .nav {
       display: flex;
       gap: 18px;
-      flex-wrap: wrap;          /* wrap on small screens */
+      flex-wrap: wrap;
       color: var(--muted);
       font-size: .95rem;
       align-items: center;
@@ -105,8 +77,6 @@
       transition: color 0.3s ease;
     }
 
-    /* Theme toggle button: pill-shaped, semi-transparent, with blur.
-       Using a button element for better accessibility and semantics. */
     .theme-toggle {
       padding: 6px 10px;
       border-radius: 999px;
@@ -128,7 +98,6 @@
       box-shadow: 0 0 16px rgba(124,92,255,.15);
     }
 
-    /* Light-mode tweaks for the toggle. */
     body.light .theme-toggle {
       background: rgba(255,255,255,.7);
       border-color: rgba(15,23,42,.1);
@@ -142,9 +111,6 @@
       box-shadow: 0 0 12px var(--accent-2);
     }
 
-    /* -------------------------------------------
-       ACTION BUTTON (EMAIL)
-       ------------------------------------------- */
     .action-btn {
       padding: 8px 14px;
       border-radius: 999px;
@@ -180,9 +146,6 @@
       box-shadow: 0 0 20px rgba(79,70,229,.2), inset 0 1px 1px rgba(255,255,255,.4);
     }
 
-    /* -------------------------------------------
-       ANIMATIONS
-       ------------------------------------------- */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(8px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -198,12 +161,9 @@
     .section   { animation: fadeIn 0.6s ease-out; }
     .item      { animation: fadeIn 0.5s ease-out; }
 
-    /* -------------------------------------------
-       LAYOUT: HERO + CARDS
-       ------------------------------------------- */
     .hero {
       display: grid;
-      grid-template-columns: 1.4fr .9fr;  /* main content + sidebar */
+      grid-template-columns: 1.4fr .9fr;
       gap: 24px;
       align-items: stretch;
       margin-bottom: 24px;
@@ -252,7 +212,7 @@
 
     h1 {
       margin: 0;
-      font-size: clamp(2.5rem, 6vw, 4.8rem);  /* responsive title size */
+      font-size: clamp(2.5rem, 6vw, 4.8rem);
       line-height: 1.02;
       letter-spacing: -0.04em;
     }
@@ -272,9 +232,6 @@
       gap: 18px;
     }
 
-    /* -------------------------------------------
-       CONTACT BLOCK
-       ------------------------------------------- */
     .contact {
       display: grid;
       gap: 14px;
@@ -310,9 +267,6 @@
       letter-spacing: .08em;
     }
 
-    /* -------------------------------------------
-       SECTIONS, GRID, ITEMS
-       ------------------------------------------- */
     .section {
       margin-top: 24px;
       padding: 30px;
@@ -326,10 +280,25 @@
       color: var(--muted);
     }
 
+    /* Base grid: 1 column on small screens */
     .grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(1, minmax(0, 1fr));
       gap: 16px;
+    }
+
+    /* Medium screens: 2 columns */
+    @media (min-width: 640px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    /* Large screens: 4 columns for interests only */
+    @media (min-width: 1024px) {
+      #interests .grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
     }
 
     .item {
@@ -368,9 +337,6 @@
       color: var(--muted);
     }
 
-    /* -------------------------------------------
-       SKILLS TAGS
-       ------------------------------------------- */
     .skills {
       display: flex;
       flex-wrap: wrap;
@@ -407,9 +373,6 @@
       box-shadow: 0 0 16px rgba(79,70,229,.15);
     }
 
-    /* -------------------------------------------
-       FOOTER
-       ------------------------------------------- */
     footer {
       margin-top: 20px;
       color: var(--muted);
@@ -417,21 +380,11 @@
       font-size: .92rem;
     }
 
-    /* -------------------------------------------
-       RESPONSIVE LAYOUT
-       ------------------------------------------- */
     @media (max-width: 860px) {
       .hero { grid-template-columns: 1fr; }
-      .grid { grid-template-columns: 1fr; }
       .topbar { flex-direction: column; align-items: flex-start; }
     }
 
-    /* -------------------------------------------
-       PRINT STYLES
-       -------------------------------------------
-       This section forces high contrast and removes
-       “screen-only” visual fluff when printing.
-    */
     @media print {
       body {
         background: #ffffff !important;
@@ -472,7 +425,6 @@
       .kicker::before { display: none !important; }
       .theme-toggle, .nav a.action-btn { display: none !important; }
 
-      /* Use a print-friendly serif and standard sizes. */
       body {
         font-family: Georgia, "Times New Roman", Times, serif !important;
         font-size: 12pt !important;
@@ -481,7 +433,6 @@
 
       .grid { grid-template-columns: 1fr !important; }
 
-      /* Prevent ugly page breaks inside items. */
       .item, .card, .contact-item, ul { page-break-inside: avoid !important; break-inside: avoid !important; }
       .item { page-break-after: auto !important; }
       h2, h3 { page-break-after: avoid !important; page-break-before: avoid !important; }
@@ -498,7 +449,6 @@
 
       .section h2::before, .section h2::after, .kicker::before { display: none !important; }
 
-      /* Allow a different behavior if you ever add `.single-page` class. */
       .single-page .item,
       .single-page .card,
       .single-page .contact-item,
@@ -506,6 +456,7 @@
         page-break-inside: auto !important;
         break-inside: auto !important;
       }
+
       .single-page .grid { grid-template-columns: 1fr 1fr !important; }
       .single-page .theme-toggle, .single-page .nav, .single-page .download-btn { display: none !important; }
     }
@@ -513,30 +464,20 @@
 </head>
 <body>
   <div class="wrap">
-    <!-- Top bar with brand + navigation + theme toggle. -->
     <header class="topbar">
       <div class="brand">Resume</div>
       <nav class="nav">
-        <!-- Anchor links that scroll to sections. -->
         <a href="#experience">Experience</a>
         <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
         <a href="#references">References</a>
-
-        <!-- Mailto link: opens user’s email client with pre-filled subject. -->
-        <a href="mailto:Doerksen.Jordan@gmail.com?subject=Let's%20connect"
-           class="action-btn email-btn">
-          <!-- Simple inline SVG icon instead of an image file.
-               Chosen so it scales well and matches text color via stroke="currentColor". -->
-          <svg width="16" height="16" viewBox="0 0 24 24"
-               fill="none" stroke="currentColor" stroke-width="2">
+        <a href="mailto:Doerksen.Jordan@gmail.com?subject=Let's%20connect" class="action-btn email-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
             <polyline points="22,6 12,13 2,6"></polyline>
           </svg>
           Email
         </a>
-
-        <!-- Theme toggle button: uses JS to toggle .light on <body>. -->
         <button class="theme-toggle" type="button" id="themeToggle">
           <span class="theme-dot"></span>
           <span id="themeLabel">Dark mode</span>
@@ -544,7 +485,6 @@
       </nav>
     </header>
 
-    <!-- Hero section: main elevator pitch plus contact sidebar. -->
     <section class="hero">
       <div class="card hero-main">
         <div class="kicker">Jordan Doerksen</div>
@@ -555,7 +495,6 @@
         </p>
       </div>
 
-      <!-- Sidebar contact info; content is injected from JSON via JS. -->
       <aside class="card hero-side" id="contact">
         <div class="contact" id="contactList">
           <!-- populated by script -->
@@ -563,9 +502,6 @@
       </aside>
     </section>
 
-    <!-- Experience, Skills, References, Interests sections.
-         Each section has an empty container, filled by JS from resume data.
-    -->
     <section class="card section" id="experience">
       <h2>Experience</h2>
       <div class="grid" id="experienceGrid"></div>
@@ -591,9 +527,6 @@
     </footer>
   </div>
 
-  <!-- Embedded JSON data: acts as a fallback if resume.json file isn't found.
-       Using <script type="application/json"> is a pattern to store data in HTML
-       without executing it as JS. -->
   <script id="resumeData" type="application/json">
     {
       "name": "Jordan Doerksen",
@@ -607,46 +540,58 @@
       "experience": [],
       "skills": [],
       "interests": [
-        { "title": "Music — Guitar & Composition", "desc": "Write and record music across styles; practiced instrument technique and composition." },
-        { "title": "Coding & Small Projects", "desc": "Experiment with new languages and build compact Python tools for automation and prototyping." },
-        { "title": "3D Modeling & Printing", "desc": "Design and print practical items like self-watering seed starters, desk organizers, and pegboard walls." },
-        { "title": "Hardware Enclosures & Tooling", "desc": "Create custom cases and organizers for Raspberry Pi and audio gear; focus on fit and durability." }
+        {
+          "title": "Equipment & Tools",
+          "desc": "Comfortable learning new tools and equipment, from power tools to basic shop technology."
+        },
+        {
+          "title": "Safety & Procedures",
+          "desc": "Strong interest in safe work practices, checklists, and following site procedures correctly."
+        },
+        {
+          "title": "Process Improvement",
+          "desc": "Enjoy finding small ways to organize work, reduce wasted motion, and keep tasks flowing."
+        },
+        {
+          "title": "Hands-On Projects",
+          "desc": "Build and repair practical items at home, including basic woodworking and hardware setups."
+        },
+        {
+          "title": "3D Printing & Design",
+          "desc": "Use 3D printers to create custom storage, brackets, and fixtures that solve day-to-day problems."
+        },
+        {
+          "title": "Basic Coding & Automation",
+          "desc": "Create small scripts or tools that simplify repetitive tasks and improve efficiency."
+        },
+        {
+          "title": "Team-Based Work",
+          "desc": "Value clear communication, reliability, and supporting co-workers to get jobs done safely and on time."
+        },
+        {
+          "title": "Continuous Learning",
+          "desc": "Regularly pick up new skills and methods to work more safely, efficiently, and accurately."
+        }
       ],
       "references": []
     }
   </script>
 
   <script>
-    /* ----------------------------------------------------
-       THEME TOGGLING + RESUME DATA LOADING
-       ---------------------------------------------------- */
-
-    // Cache references to DOM elements we’ll interact with repeatedly.
-    const body   = document.body;
+    const body = document.body;
     const toggle = document.getElementById('themeToggle');
-    const label  = document.getElementById('themeLabel');
+    const label = document.getElementById('themeLabel');
 
-    // We’ll store the resume JSON here after loading it.
     let resume = null;
-
-    // Immediately-invoked async function:
-    // This pattern lets us use async/await at top-level without
-    // polluting global scope.
     (async function loadResume(){
       try {
-        // Try to load resume.json from the server.
-        // This is nice for deployment because you can update content
-        // without touching HTML.
         const res = await fetch('resume.json');
         if (res.ok) {
           resume = await res.json();
         } else {
-          // If the file exists but is not OK (404, 500, etc.), force fallback.
           throw new Error('resume.json not available');
         }
       } catch (err) {
-        // Fallback: parse the inline JSON block so the page still works
-        // when opened as file:// or when there is no backend.
         try {
           const inline = document.getElementById('resumeData');
           if (inline) resume = JSON.parse(inline.textContent);
@@ -655,10 +600,7 @@
         }
       }
 
-      // If everything failed, we bail out and log an error.
       if (!resume) return console.error('Failed to load resume data');
-
-      // Once the data is ready, render all dynamic parts.
       renderHero();
       renderContact();
       renderExperience();
@@ -667,8 +609,6 @@
       renderInterests();
     })();
 
-    // Restore saved theme from localStorage (if any).
-    // Using localStorage keeps the choice across reloads.
     const saved = window.localStorage.getItem('jordan-theme');
     if (saved === 'light') {
       body.classList.add('light');
@@ -678,10 +618,7 @@
       toggle.setAttribute('aria-pressed', 'false');
     }
 
-    // Accessibility: describe what the toggle does.
     toggle.setAttribute('aria-label', 'Toggle theme');
-
-    // Clicking the toggle flips the theme and updates label + storage.
     toggle.addEventListener('click', () => {
       body.classList.toggle('light');
       const isLight = body.classList.contains('light');
@@ -690,78 +627,59 @@
       toggle.setAttribute('aria-pressed', isLight ? 'true' : 'false');
     });
 
-    /* ----------------------------------------------------
-       RENDER HELPERS
-       ---------------------------------------------------- */
-
-    // Small helper to create DOM from an HTML string (unused in current code
-    // but handy for future extensions).
     function el(html) {
       const template = document.createElement('template');
       template.innerHTML = html.trim();
       return template.content.firstChild;
     }
 
-    // Build the contact section from resume.contact array.
     function renderContact() {
       const container = document.getElementById('contactList');
       container.innerHTML = '';
       resume.contact.forEach(c => {
-        const item   = document.createElement('div');
+        const item = document.createElement('div');
         item.className = 'contact-item';
-
         const strong = document.createElement('strong');
         strong.textContent = c.label;
         item.appendChild(strong);
-
         if (c.href) {
-          // If a link is provided (e.g. email), render as an anchor.
           const a = document.createElement('a');
           a.href = c.href;
           a.textContent = c.value;
           item.appendChild(a);
         } else {
-          // Otherwise just render text.
           item.appendChild(document.createTextNode(c.value));
         }
-
         container.appendChild(item);
       });
     }
 
-    // Update hero text from resume data.
     function renderHero() {
       const nameEl = document.querySelector('.kicker');
       const headEl = document.querySelector('h1');
-      const sumEl  = document.querySelector('.subtitle');
-
+      const sumEl = document.querySelector('.subtitle');
       if (nameEl) nameEl.textContent = resume.name;
       if (headEl) headEl.textContent = resume.headline;
-      if (sumEl)  sumEl.textContent  = resume.summary;
+      if (sumEl) sumEl.textContent = resume.summary;
     }
 
-    // Render each experience entry as a card with bullets.
     function renderExperience() {
       const grid = document.getElementById('experienceGrid');
       grid.innerHTML = '';
       resume.experience.forEach(entry => {
         const art = document.createElement('article');
         art.className = 'item';
-
         const h3 = document.createElement('h3');
         h3.textContent = entry.title;
-
         const meta = document.createElement('div');
         meta.className = 'meta';
         meta.textContent = entry.meta;
-
         const ul = document.createElement('ul');
         entry.bullets.forEach(b => {
           const li = document.createElement('li');
           li.textContent = b;
           ul.appendChild(li);
         });
-
         art.appendChild(h3);
         art.appendChild(meta);
         art.appendChild(ul);
@@ -769,7 +687,6 @@
       });
     }
 
-    // Render skills as pill-shaped tags.
     function renderSkills() {
       const list = document.getElementById('skillsList');
       list.innerHTML = '';
@@ -781,28 +698,23 @@
       });
     }
 
-    // Render references similar to experience: name, meta, bullets.
     function renderReferences() {
       const grid = document.getElementById('referencesGrid');
       grid.innerHTML = '';
       resume.references.forEach(r => {
         const art = document.createElement('article');
         art.className = 'item';
-
         const h3 = document.createElement('h3');
         h3.textContent = r.name;
-
         const meta = document.createElement('div');
         meta.className = 'meta';
         meta.textContent = r.meta;
-
         const ul = document.createElement('ul');
         r.bullets.forEach(b => {
           const li = document.createElement('li');
           li.textContent = b;
           ul.appendChild(li);
         });
-
         art.appendChild(h3);
         art.appendChild(meta);
         art.appendChild(ul);
@@ -810,7 +722,6 @@
       });
     }
 
-    // Render interests as simple cards with title + description.
     function renderInterests() {
       const grid = document.getElementById('interestsGrid');
       if (!resume.interests) return;
@@ -818,20 +729,15 @@
       resume.interests.forEach(i => {
         const art = document.createElement('article');
         art.className = 'item';
-
         const h3 = document.createElement('h3');
         h3.textContent = i.title;
-
         const p = document.createElement('p');
         p.textContent = i.desc;
-
         art.appendChild(h3);
         if (i.desc) art.appendChild(p);
         grid.appendChild(art);
       });
     }
-
-    // Note: initial render is intentionally deferred until resume data is ready.
   </script>
 </body>
 </html>
