@@ -482,10 +482,7 @@
         <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
         <a href="#references">References</a>
-        <button class="action-btn download-btn" id="downloadPdfBtn" type="button">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-          Download PDF
-        </button>
+        <!-- client-side PDF download removed; use server-side generator instead -->
         <a href="mailto:Doerksen.Jordan@gmail.com?subject=Let's%20connect" class="action-btn email-btn">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
           Email
@@ -540,13 +537,10 @@
     </footer>
   </div>
 
-  <!-- html2pdf (bundled) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
   <script>
     const body = document.body;
     const toggle = document.getElementById('themeToggle');
     const label = document.getElementById('themeLabel');
-    const downloadBtn = document.getElementById('downloadPdfBtn');
 
     // resume data is now sourced from resume.json for easier editing
     let resume = null;
@@ -678,37 +672,7 @@
 
     // initial render removed; content is rendered after `resume.json` is fetched
 
-    // PDF generation
-    function generatePdf() {
-      const element = document.querySelector('.wrap');
-      const opt = {
-        margin:       10,
-        filename:     'Jordan-Doerksen-Resume.pdf',
-        image:        { type: 'jpeg', quality: 1.0 },
-        html2canvas:  { scale: 4, useCORS: true, logging: false, allowTaint: false },
-        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        pagebreak:    { mode: ['css', 'legacy'] }
-      };
-
-      // temporarily switch to a printer-friendly mode for better PDF contrast
-      const wasLight = body.classList.contains('light');
-      body.classList.add('pdf-mode');
-      if (!wasLight) body.classList.add('light');
-
-      // allow styles to update before rendering at higher resolution
-      setTimeout(() => {
-        html2pdf().set(opt).from(element).save().then(() => {
-          // cleanup
-          body.classList.remove('pdf-mode');
-          if (!wasLight) body.classList.remove('light');
-        }).catch(() => {
-          body.classList.remove('pdf-mode');
-          if (!wasLight) body.classList.remove('light');
-        });
-      }, 350);
-    }
-
-    downloadBtn.addEventListener('click', generatePdf);
+    // server-side PDF generation is available via the repository script
   </script>
 </body>
 </html>
