@@ -470,30 +470,18 @@
     const label = document.getElementById('themeLabel');
     const downloadBtn = document.getElementById('downloadPdfBtn');
 
-    // resume data (rendered dynamically)
-    const resume = {
-      name: 'Jordan Doerksen',
-      headline: 'Reliable laborer with railway, warehouse, and roofing experience.',
-      summary: `I’m a reliable labourer with hands-on experience in rail operations, warehouse logistics, and roofing. I prioritize safety, follow procedures closely, and work well both independently and as part of a team to meet deadlines and productivity goals.`,
-      contact: [
-        {label: 'Location', value: 'Winnipeg, MB'},
-        {label: 'Phone', value: '905-259-9235'},
-        {label: 'Email', value: 'Doerksen.Jordan@gmail.com', href: 'mailto:Doerksen.Jordan@gmail.com'}
-      ],
-      experience: [
-        {title: 'Canadian National Railway — Conductor / Engineering Department', meta: '2023 – 2025 · Rail operations and safety-focused work', bullets: ['Worked in rail operations with a focus on safety, teamwork, and procedure.', 'Held conductor and engineering department certifications.', 'Handled responsibilities in a high-pressure, fast-moving environment.']},
-        {title: 'Aimco International — Order Picker / Forklift Driver', meta: '2021 – 2023 · Freight handling and forklift work', bullets: ['Loaded, unloaded, and moved freight and materials.', 'Operated forklifts safely and followed site procedures.', 'Helped keep warehouse operations organized and efficient.']},
-        {title: 'Amazon — Fulfillment Associate', meta: '2020 – 2021 · High-volume warehouse operations', bullets: ['Picked and processed orders accurately and efficiently.', 'Used RF headset, IR scanner, pallet jack, and lift truck equipment.', 'Supported productivity goals in a high-volume warehouse environment.']},
-        {title: 'Sobeys Distribution Centre — Order Picker', meta: '2017 – 2020 · Distribution and order fulfillment', bullets: ['Operated warehouse equipment to support package flow and order fulfillment.', 'Worked accurately in a busy distribution setting.', 'Helped meet timing and quality expectations.']},
-        {title: 'SKP Roofing Inc. — Labourer / Roofer', meta: '2014 – 2017 · Roofing and cladding installation', bullets: ['Assisted with roofing and cladding installation on residential and commercial properties.', 'Worked from instructions and completed tasks with minimal supervision.', 'Kept the work area clean and safe.']},
-        {title: 'Education', meta: 'Henry Street High School', bullets: ['High School Diploma']}
-      ],
-      skills: ['Warehouse operations','Forklift use','Pallet jack use','Freight handling','Order picking','Rail operations','Safety procedures','Teamwork','Communication','First Aid','H2S Alive','Class 5 licence'],
-      references: [
-        {name: 'Kourtney McBride', meta: 'CN Rail Trainer', bullets: ['Phone: 587-343-3185']},
-        {name: 'Jason Allen', meta: 'Supervisor, Aimco International', bullets: ['Phone: 416-846-7067']}
-      ]
-    };
+    // resume data is now sourced from resume.json for easier editing
+    let resume = null;
+    fetch('resume.json').then(r => r.json()).then(data => {
+      resume = data;
+      renderHero();
+      renderContact();
+      renderExperience();
+      renderSkills();
+      renderReferences();
+    }).catch(err => {
+      console.error('Failed to load resume.json', err);
+    });
 
     // optional: remember theme preference
     const saved = window.localStorage.getItem('jordan-theme');
@@ -610,12 +598,7 @@
       });
     }
 
-    // initial render
-    renderHero();
-    renderContact();
-    renderExperience();
-    renderSkills();
-    renderReferences();
+    // initial render removed; content is rendered after `resume.json` is fetched
 
     // PDF generation
     function generatePdf() {
