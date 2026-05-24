@@ -393,6 +393,42 @@
       .grid { grid-template-columns: 1fr; }
       .topbar { flex-direction: column; align-items: flex-start; }
     }
+
+    /* PDF / print improvements */
+    @media print, .pdf-mode {
+      body {
+        background: #ffffff !important;
+        color: #0c1220 !important;
+        box-shadow: none !important;
+      }
+
+      .wrap {
+        max-width: 190mm !important;
+        margin: 0 auto !important;
+        padding: 18mm !important;
+        background: #ffffff !important;
+      }
+
+      .card, .item, .contact-item {
+        background: #ffffff !important;
+        border: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        color: #0c1220 !important;
+      }
+
+      .tag {
+        background: #f3f4f6 !important;
+        border: 1px solid #e5e7eb !important;
+        color: #0c1220 !important;
+      }
+
+      .kicker::before { display: none !important; }
+      .theme-toggle, .nav a.action-btn, .download-btn { display: none !important; }
+
+      /* slightly larger, printer-friendly type */
+      body { font-size: 12pt !important; line-height: 1.5 !important; }
+    }
   </style>
 </head>
 <body>
@@ -606,21 +642,28 @@
       const opt = {
         margin:       10,
         filename:     'Jordan-Doerksen-Resume.pdf',
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true },
-        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        image:        { type: 'jpeg', quality: 1.0 },
+        html2canvas:  { scale: 3, useCORS: true },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak:    { mode: ['css', 'legacy'] }
       };
-      // temporarily switch to light theme for better print contrast if currently dark
+
+      // temporarily switch to a printer-friendly mode for better PDF contrast
       const wasLight = body.classList.contains('light');
+      body.classList.add('pdf-mode');
       if (!wasLight) body.classList.add('light');
-      // allow styles to update
+
+      // allow styles to update before rendering at higher resolution
       setTimeout(() => {
         html2pdf().set(opt).from(element).save().then(() => {
+          // cleanup
+          body.classList.remove('pdf-mode');
           if (!wasLight) body.classList.remove('light');
         }).catch(() => {
+          body.classList.remove('pdf-mode');
           if (!wasLight) body.classList.remove('light');
         });
-      }, 120);
+      }, 350);
     }
 
     downloadBtn.addEventListener('click', generatePdf);
