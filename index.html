@@ -36,12 +36,12 @@
       margin: 0;
       font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(124,92,255,.18), transparent 30%),
-        radial-gradient(circle at top right, rgba(34,211,238,.12), transparent 25%),
+        radial-gradient(circle at top left, rgba(124,92,255,.25), transparent 40%),
+        radial-gradient(circle at bottom right, rgba(34,211,238,.15), transparent 35%),
         var(--bg);
       color: var(--text);
       line-height: 1.6;
-      transition: background 0.3s ease, color 0.3s ease;
+      transition: background 0.5s ease, color 0.3s ease;
     }
 
     a { color: inherit; text-decoration: none; }
@@ -72,7 +72,10 @@
       align-items: center;
     }
 
-    .nav a:hover { color: var(--text); }
+    .nav a:hover {
+      color: var(--text);
+      transition: color 0.3s ease;
+    }
 
     .theme-toggle {
       padding: 6px 10px;
@@ -86,6 +89,13 @@
       gap: 6px;
       cursor: pointer;
       backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      background: rgba(124,92,255,.12);
+      border-color: rgba(124,92,255,.3);
+      box-shadow: 0 0 16px rgba(124,92,255,.15);
     }
 
     body.light .theme-toggle {
@@ -99,6 +109,79 @@
       border-radius: 50%;
       background: var(--accent-2);
       box-shadow: 0 0 12px var(--accent-2);
+    }
+
+    .action-btn {
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(124,92,255,.08);
+      color: var(--text);
+      font-size: .85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .action-btn:hover {
+      background: rgba(124,92,255,.18);
+      border-color: rgba(124,92,255,.4);
+      box-shadow: 0 0 20px rgba(124,92,255,.25), inset 0 1px 1px rgba(255,255,255,.1);
+      transform: translateY(-2px);
+    }
+
+    body.light .action-btn {
+      background: rgba(79,70,229,.08);
+      border-color: rgba(79,70,229,.2);
+    }
+
+    body.light .action-btn:hover {
+      background: rgba(79,70,229,.16);
+      border-color: rgba(79,70,229,.4);
+      box-shadow: 0 0 20px rgba(79,70,229,.2), inset 0 1px 1px rgba(255,255,255,.4);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .hero-main {
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    .hero-side {
+      animation: slideInLeft 0.6s ease-out 0.15s both;
+    }
+
+    .section {
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    .item {
+      animation: fadeIn 0.5s ease-out;
     }
 
     .hero {
@@ -115,7 +198,12 @@
       border-radius: 24px;
       box-shadow: var(--shadow);
       backdrop-filter: blur(10px);
-      transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 25px 70px rgba(124,92,255,.15), var(--shadow);
+      border-color: rgba(124,92,255,.2);
     }
 
     body.light .card {
@@ -179,7 +267,13 @@
       border-radius: 16px;
       color: var(--muted);
       font-size: .95rem;
-      transition: background 0.3s ease, border-color 0.3s ease;
+      transition: all 0.3s ease;
+    }
+
+    .contact-item:hover {
+      background: rgba(124,92,255,.08);
+      border-color: rgba(124,92,255,.2);
+      transform: translateX(4px);
     }
 
     body.light .contact-item {
@@ -220,7 +314,7 @@
       border-radius: 18px;
       background: rgba(255,255,255,.02);
       border: 1px solid rgba(255,255,255,.06);
-      transition: background 0.3s ease, border-color 0.3s ease, transform 0.15s ease;
+      transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     body.light .item {
@@ -229,7 +323,9 @@
     }
 
     .item:hover {
-      transform: translateY(-2px);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(124,92,255,.12);
+      border-color: rgba(124,92,255,.15);
     }
 
     .item h3 {
@@ -262,13 +358,27 @@
       border: 1px solid rgba(124,92,255,.25);
       color: var(--text);
       font-size: .92rem;
-      transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+      transition: all 0.3s ease;
+      cursor: default;
+    }
+
+    .tag:hover {
+      background: rgba(124,92,255,.25);
+      border-color: rgba(124,92,255,.4);
+      box-shadow: 0 0 16px rgba(124,92,255,.2);
+      transform: translateY(-2px);
     }
 
     body.light .tag {
       background: #eef2ff;
       border-color: rgba(79,70,229,.35);
       color: #1e293b;
+    }
+
+    body.light .tag:hover {
+      background: rgba(79,70,229,.2);
+      border-color: rgba(79,70,229,.5);
+      box-shadow: 0 0 16px rgba(79,70,229,.15);
     }
 
     footer {
@@ -294,6 +404,14 @@
         <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
         <a href="#references">References</a>
+        <button class="action-btn download-btn" id="downloadPdfBtn" type="button">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Download PDF
+        </button>
+        <a href="mailto:Doerksen.Jordan@gmail.com?subject=Let's%20connect" class="action-btn email-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          Email
+        </a>
         <button class="theme-toggle" type="button" id="themeToggle">
           <span class="theme-dot"></span>
           <span id="themeLabel">Dark mode</span>
@@ -312,122 +430,30 @@
       </div>
 
       <aside class="card hero-side" id="contact">
-        <div class="contact">
-          <div class="contact-item">
-            <strong>Location</strong>
-            Winnipeg, MB
-          </div>
-          <div class="contact-item">
-            <strong>Phone</strong>
-            905-259-9235
-          </div>
-          <div class="contact-item">
-            <strong>Email</strong>
-            <a href="mailto:Doerksen.Jordan@gmail.com">Doerksen.Jordan@gmail.com</a>
-          </div>
+        <div class="contact" id="contactList">
+          <!-- populated by script -->
         </div>
       </aside>
     </section>
 
     <section class="card section" id="experience">
       <h2>Experience</h2>
-      <div class="grid">
-        <article class="item">
-          <h3>Canadian National Railway — Conductor / Engineering Department</h3>
-          <div class="meta">2023 – 2025 · Rail operations and safety-focused work</div>
-          <ul>
-            <li>Worked in rail operations with a focus on safety, teamwork, and procedure.</li>
-            <li>Held conductor and engineering department certifications.</li>
-            <li>Handled responsibilities in a high-pressure, fast-moving environment.</li>
-          </ul>
-        </article>
-
-        <article class="item">
-          <h3>Aimco International — Order Picker / Forklift Driver</h3>
-          <div class="meta">2021 – 2023 · Freight handling and forklift work</div>
-          <ul>
-            <li>Loaded, unloaded, and moved freight and materials.</li>
-            <li>Operated forklifts safely and followed site procedures.</li>
-            <li>Helped keep warehouse operations organized and efficient.</li>
-          </ul>
-        </article>
-
-        <article class="item">
-          <h3>Amazon — Fulfillment Associate</h3>
-          <div class="meta">2020 – 2021 · High-volume warehouse operations</div>
-          <ul>
-            <li>Picked and processed orders accurately and efficiently.</li>
-            <li>Used RF headset, IR scanner, pallet jack, and lift truck equipment.</li>
-            <li>Supported productivity goals in a high-volume warehouse environment.</li>
-          </ul>
-        </article>
-
-        <article class="item">
-          <h3>Sobeys Distribution Centre — Order Picker</h3>
-          <div class="meta">2017 – 2020 · Distribution and order fulfillment</div>
-          <ul>
-            <li>Operated warehouse equipment to support package flow and order fulfillment.</li>
-            <li>Worked accurately in a busy distribution setting.</li>
-            <li>Helped meet timing and quality expectations.</li>
-          </ul>
-        </article>
-
-        <article class="item">
-          <h3>SKP Roofing Inc. — Labourer / Roofer</h3>
-          <div class="meta">2014 – 2017 · Roofing and cladding installation</div>
-          <ul>
-            <li>Assisted with roofing and cladding installation on residential and commercial properties.</li>
-            <li>Worked from instructions and completed tasks with minimal supervision.</li>
-            <li>Kept the work area clean and safe.</li>
-          </ul>
-        </article>
-
-        <article class="item">
-          <h3>Education</h3>
-          <div class="meta">Henry Street High School</div>
-          <ul>
-            <li>High School Diploma</li>
-          </ul>
-        </article>
+      <div class="grid" id="experienceGrid">
+        <!-- populated by script -->
       </div>
     </section>
 
     <section class="card section" id="skills">
       <h2>Skills</h2>
-      <div class="skills">
-        <span class="tag">Warehouse operations</span>
-        <span class="tag">Forklift use</span>
-        <span class="tag">Pallet jack use</span>
-        <span class="tag">Freight handling</span>
-        <span class="tag">Order picking</span>
-        <span class="tag">Rail operations</span>
-        <span class="tag">Safety procedures</span>
-        <span class="tag">Teamwork</span>
-        <span class="tag">Communication</span>
-        <span class="tag">First Aid</span>
-        <span class="tag">H2S Alive</span>
-        <span class="tag">Class 5 licence</span>
+      <div class="skills" id="skillsList">
+        <!-- populated by script -->
       </div>
     </section>
 
     <section class="card section" id="references">
       <h2>References</h2>
-      <div class="grid">
-        <article class="item">
-          <h3>Kourtney McBride</h3>
-          <div class="meta">CN Rail Trainer</div>
-          <ul>
-            <li>Phone: 587-343-3185</li>
-          </ul>
-        </article>
-
-        <article class="item">
-          <h3>Jason Allen</h3>
-          <div class="meta">Supervisor, Aimco International</div>
-          <ul>
-            <li>Phone: 416-846-7067</li>
-          </ul>
-        </article>
+      <div class="grid" id="referencesGrid">
+        <!-- populated by script -->
       </div>
     </section>
 
@@ -436,24 +462,185 @@
     </footer>
   </div>
 
+  <!-- html2pdf (bundled) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
   <script>
     const body = document.body;
     const toggle = document.getElementById('themeToggle');
     const label = document.getElementById('themeLabel');
+    const downloadBtn = document.getElementById('downloadPdfBtn');
 
-    // optional: remember preference
+    // resume data (rendered dynamically)
+    const resume = {
+      name: 'Jordan Doerksen',
+      headline: 'Reliable laborer with railway, warehouse, and roofing experience.',
+      summary: `Strong safety focus, steady under pressure, and comfortable in fast-paced physical environments. I work well independently, stay self-motivated, and contribute as a reliable team player.`,
+      contact: [
+        {label: 'Location', value: 'Winnipeg, MB'},
+        {label: 'Phone', value: '905-259-9235'},
+        {label: 'Email', value: 'Doerksen.Jordan@gmail.com', href: 'mailto:Doerksen.Jordan@gmail.com'}
+      ],
+      experience: [
+        {title: 'Canadian National Railway — Conductor / Engineering Department', meta: '2023 – 2025 · Rail operations and safety-focused work', bullets: ['Worked in rail operations with a focus on safety, teamwork, and procedure.', 'Held conductor and engineering department certifications.', 'Handled responsibilities in a high-pressure, fast-moving environment.']},
+        {title: 'Aimco International — Order Picker / Forklift Driver', meta: '2021 – 2023 · Freight handling and forklift work', bullets: ['Loaded, unloaded, and moved freight and materials.', 'Operated forklifts safely and followed site procedures.', 'Helped keep warehouse operations organized and efficient.']},
+        {title: 'Amazon — Fulfillment Associate', meta: '2020 – 2021 · High-volume warehouse operations', bullets: ['Picked and processed orders accurately and efficiently.', 'Used RF headset, IR scanner, pallet jack, and lift truck equipment.', 'Supported productivity goals in a high-volume warehouse environment.']},
+        {title: 'Sobeys Distribution Centre — Order Picker', meta: '2017 – 2020 · Distribution and order fulfillment', bullets: ['Operated warehouse equipment to support package flow and order fulfillment.', 'Worked accurately in a busy distribution setting.', 'Helped meet timing and quality expectations.']},
+        {title: 'SKP Roofing Inc. — Labourer / Roofer', meta: '2014 – 2017 · Roofing and cladding installation', bullets: ['Assisted with roofing and cladding installation on residential and commercial properties.', 'Worked from instructions and completed tasks with minimal supervision.', 'Kept the work area clean and safe.']},
+        {title: 'Education', meta: 'Henry Street High School', bullets: ['High School Diploma']}
+      ],
+      skills: ['Warehouse operations','Forklift use','Pallet jack use','Freight handling','Order picking','Rail operations','Safety procedures','Teamwork','Communication','First Aid','H2S Alive','Class 5 licence'],
+      references: [
+        {name: 'Kourtney McBride', meta: 'CN Rail Trainer', bullets: ['Phone: 587-343-3185']},
+        {name: 'Jason Allen', meta: 'Supervisor, Aimco International', bullets: ['Phone: 416-846-7067']}
+      ]
+    };
+
+    // optional: remember theme preference
     const saved = window.localStorage.getItem('jordan-theme');
     if (saved === 'light') {
       body.classList.add('light');
       label.textContent = 'Light mode';
+      toggle.setAttribute('aria-pressed', 'true');
+    } else {
+      toggle.setAttribute('aria-pressed', 'false');
     }
 
+    toggle.setAttribute('aria-label', 'Toggle theme');
     toggle.addEventListener('click', () => {
       body.classList.toggle('light');
       const isLight = body.classList.contains('light');
       label.textContent = isLight ? 'Light mode' : 'Dark mode';
       window.localStorage.setItem('jordan-theme', isLight ? 'light' : 'dark');
+      toggle.setAttribute('aria-pressed', isLight ? 'true' : 'false');
     });
+
+    // render helpers
+    function el(html) {
+      const template = document.createElement('template');
+      template.innerHTML = html.trim();
+      return template.content.firstChild;
+    }
+
+    function renderContact() {
+      const container = document.getElementById('contactList');
+      container.innerHTML = '';
+      resume.contact.forEach(c => {
+        const item = document.createElement('div');
+        item.className = 'contact-item';
+        const strong = document.createElement('strong');
+        strong.textContent = c.label;
+        item.appendChild(strong);
+        if (c.href) {
+          const a = document.createElement('a');
+          a.href = c.href;
+          a.textContent = c.value;
+          item.appendChild(a);
+        } else {
+          item.appendChild(document.createTextNode(c.value));
+        }
+        container.appendChild(item);
+      });
+    }
+
+    function renderHero() {
+      const nameEl = document.querySelector('.kicker');
+      const headEl = document.querySelector('h1');
+      const sumEl = document.querySelector('.subtitle');
+      if (nameEl) nameEl.textContent = resume.name;
+      if (headEl) headEl.textContent = resume.headline;
+      if (sumEl) sumEl.textContent = resume.summary;
+    }
+
+    function renderExperience() {
+      const grid = document.getElementById('experienceGrid');
+      grid.innerHTML = '';
+      resume.experience.forEach(entry => {
+        const art = document.createElement('article');
+        art.className = 'item';
+        const h3 = document.createElement('h3');
+        h3.textContent = entry.title;
+        const meta = document.createElement('div');
+        meta.className = 'meta';
+        meta.textContent = entry.meta;
+        const ul = document.createElement('ul');
+        entry.bullets.forEach(b => {
+          const li = document.createElement('li');
+          li.textContent = b;
+          ul.appendChild(li);
+        });
+        art.appendChild(h3);
+        art.appendChild(meta);
+        art.appendChild(ul);
+        grid.appendChild(art);
+      });
+    }
+
+    function renderSkills() {
+      const list = document.getElementById('skillsList');
+      list.innerHTML = '';
+      resume.skills.forEach(s => {
+        const span = document.createElement('span');
+        span.className = 'tag';
+        span.textContent = s;
+        list.appendChild(span);
+      });
+    }
+
+    function renderReferences() {
+      const grid = document.getElementById('referencesGrid');
+      grid.innerHTML = '';
+      resume.references.forEach(r => {
+        const art = document.createElement('article');
+        art.className = 'item';
+        const h3 = document.createElement('h3');
+        h3.textContent = r.name;
+        const meta = document.createElement('div');
+        meta.className = 'meta';
+        meta.textContent = r.meta;
+        const ul = document.createElement('ul');
+        r.bullets.forEach(b => {
+          const li = document.createElement('li');
+          li.textContent = b;
+          ul.appendChild(li);
+        });
+        art.appendChild(h3);
+        art.appendChild(meta);
+        art.appendChild(ul);
+        grid.appendChild(art);
+      });
+    }
+
+    // initial render
+    renderHero();
+    renderContact();
+    renderExperience();
+    renderSkills();
+    renderReferences();
+
+    // PDF generation
+    function generatePdf() {
+      const element = document.querySelector('.wrap');
+      const opt = {
+        margin:       10,
+        filename:     'Jordan-Doerksen-Resume.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+      // temporarily switch to light theme for better print contrast if currently dark
+      const wasLight = body.classList.contains('light');
+      if (!wasLight) body.classList.add('light');
+      // allow styles to update
+      setTimeout(() => {
+        html2pdf().set(opt).from(element).save().then(() => {
+          if (!wasLight) body.classList.remove('light');
+        }).catch(() => {
+          if (!wasLight) body.classList.remove('light');
+        });
+      }, 120);
+    }
+
+    downloadBtn.addEventListener('click', generatePdf);
   </script>
 </body>
 </html>
