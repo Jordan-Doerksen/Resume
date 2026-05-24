@@ -395,6 +395,8 @@
     }
 
     /* PDF / print improvements */
+    @page { size: A4; margin: 10mm; }
+
     @media print, .pdf-mode {
       body {
         background: #ffffff !important;
@@ -436,8 +438,16 @@
       .kicker::before { display: none !important; }
       .theme-toggle, .nav a.action-btn, .download-btn { display: none !important; }
 
-      /* slightly larger, printer-friendly type */
-      body { font-size: 12pt !important; line-height: 1.5 !important; }
+      /* use a reliable, print-friendly font and slightly larger type */
+      body { font-family: Georgia, "Times New Roman", Times, serif !important; font-size: 12pt !important; line-height: 1.5 !important; }
+
+      /* single-column layout for print to avoid layout shifts */
+      .grid { grid-template-columns: 1fr !important; }
+
+      /* avoid breaking inside items and lists */
+      .item, .card, .contact-item, ul { page-break-inside: avoid !important; break-inside: avoid !important; }
+      .item { page-break-after: auto !important; }
+      h2, h3 { page-break-after: avoid !important; page-break-before: avoid !important; }
     }
   </style>
 </head>
