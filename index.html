@@ -544,24 +544,60 @@
     </footer>
   </div>
 
+  <script id="resumeData" type="application/json">
+    {
+      "name": "Jordan Doerksen",
+      "headline": "Reliable laborer with railway, warehouse, and roofing experience.",
+      "summary": "I’m a reliable labourer with hands-on experience in rail operations, warehouse logistics, and roofing. I prioritize safety, follow procedures closely, and work well both independently and as part of a team to meet deadlines and productivity goals.",
+      "contact": [
+        { "label": "Location", "value": "Winnipeg, MB" },
+        { "label": "Phone", "value": "905-259-9235" },
+        { "label": "Email", "value": "Doerksen.Jordan@gmail.com", "href": "mailto:Doerksen.Jordan@gmail.com" }
+      ],
+      "experience": [],
+      "skills": [],
+      "interests": [
+        { "title": "Music — Guitar & Composition", "desc": "Write and record music across styles; practiced instrument technique and composition." },
+        { "title": "Coding & Small Projects", "desc": "Experiment with new languages and build compact Python tools for automation and prototyping." },
+        { "title": "3D Modeling & Printing", "desc": "Design and print practical items like self-watering seed starters, desk organizers, and pegboard walls." },
+        { "title": "Hardware Enclosures & Tooling", "desc": "Create custom cases and organizers for Raspberry Pi and audio gear; focus on fit and durability." }
+      ],
+      "references": []
+    }
+  </script>
+
   <script>
     const body = document.body;
     const toggle = document.getElementById('themeToggle');
     const label = document.getElementById('themeLabel');
 
-    // resume data is now sourced from resume.json for easier editing
+    // try to load resume.json, but fall back to the embedded JSON so the page works when opened via file://
     let resume = null;
-    fetch('resume.json').then(r => r.json()).then(data => {
-      resume = data;
+    (async function loadResume(){
+      try {
+        const res = await fetch('resume.json');
+        if (res.ok) {
+          resume = await res.json();
+        } else {
+          throw new Error('resume.json not available');
+        }
+      } catch (err) {
+        try {
+          const inline = document.getElementById('resumeData');
+          if (inline) resume = JSON.parse(inline.textContent);
+        } catch (e) {
+          console.error('Failed to parse embedded resume data', e);
+        }
+      }
+
+      if (!resume) return console.error('Failed to load resume data');
       renderHero();
       renderContact();
       renderExperience();
       renderSkills();
       renderReferences();
       renderInterests();
-    }).catch(err => {
-      console.error('Failed to load resume.json', err);
-    });
+    })();
 
     // optional: remember theme preference
     const saved = window.localStorage.getItem('jordan-theme');
