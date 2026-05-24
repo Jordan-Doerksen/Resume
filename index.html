@@ -462,6 +462,14 @@
 
       /* remove any pseudo-elements near headings */
       .section h2::before, .section h2::after, .kicker::before { display: none !important; }
+
+      /* single-page mode: allow continuous flow and disable page-break rules */
+      .single-page .item, .single-page .card, .single-page .contact-item, .single-page ul {
+        page-break-inside: auto !important;
+        break-inside: auto !important;
+      }
+      .single-page .grid { grid-template-columns: 1fr 1fr !important; }
+      .single-page .theme-toggle, .single-page .nav, .single-page .download-btn { display: none !important; }
     }
   </style>
 </head>
