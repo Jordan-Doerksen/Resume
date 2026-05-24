@@ -397,7 +397,7 @@
     /* PDF / print improvements */
     @page { size: A4; margin: 10mm; }
 
-    @media print, .pdf-mode {
+    @media print, .pdf-mode, .image-capture {
       body {
         background: #ffffff !important;
         color: #0c1220 !important;
@@ -437,6 +437,35 @@
 
       .kicker::before { display: none !important; }
       .theme-toggle, .nav a.action-btn, .download-btn { display: none !important; }
+
+      /* image-capture styles: render a higher-contrast light version for PNG exports */
+      .image-capture .wrap {
+        background: #ffffff !important;
+      }
+      .image-capture .card,
+      .image-capture .item,
+      .image-capture .contact-item {
+        background: #ffffff !important;
+        border-color: #d1d5db !important;
+        color: #0c1220 !important;
+        box-shadow: none !important;
+      }
+      .image-capture .tag {
+        background: #f8fafc !important;
+        border-color: #cbd5e1 !important;
+        color: #0c1220 !important;
+      }
+      .image-capture h1,
+      .image-capture p,
+      .image-capture .meta,
+      .image-capture ul,
+      .image-capture .section h2,
+      .image-capture .item h3 {
+        color: #0c1220 !important;
+      }
+      .image-capture a {
+        color: #0c1220 !important;
+      }
 
       /* use a reliable, print-friendly font and slightly larger type */
       body { font-family: Georgia, "Times New Roman", Times, serif !important; font-size: 12pt !important; line-height: 1.5 !important; }
@@ -632,12 +661,15 @@
         try {
           const element = document.querySelector('.wrap');
           if (!element) throw new Error('Content not found');
+          document.body.classList.add('image-capture');
+          await new Promise(requestAnimationFrame);
           const canvas = await html2canvas(element, {
             scale: 2,
-            backgroundColor: '#0b0f14',
+            backgroundColor: null,
             useCORS: true,
             logging: false,
           });
+          document.body.classList.remove('image-capture');
 
           const link = document.createElement('a');
           link.href = canvas.toDataURL('image/png');
