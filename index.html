@@ -722,7 +722,7 @@
     @media (max-width: 640px) {
       .stats { grid-template-columns: 1fr; gap: 28px; }
       .card-grid { grid-template-columns: 1fr; }
-      #printBtn { display: none; }
+      #downloadBtn { display: none; }
 
       .contact-row {
         grid-template-columns: minmax(0, 1fr) auto;
@@ -792,7 +792,7 @@
           <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
           <svg class="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
         </button>
-        <button class="btn btn-ghost" id="printBtn" type="button">Save PDF</button>
+        <a class="btn btn-ghost" id="downloadBtn" href="Jordan%20Doerksen%20-%20Resume.pdf" download="Jordan Doerksen - Resume.pdf">Download PDF</a>
         <a class="btn btn-ink" id="emailBtn" href="mailto:Doerksen.Jordan@gmail.com?subject=Let's%20connect">Email</a>
       </div>
     </div>
@@ -1038,7 +1038,6 @@
       window.addEventListener('scroll', onScroll, { passive: true });
       onScroll();
 
-      document.getElementById('printBtn').addEventListener('click', function () { window.print(); });
       document.getElementById('year').textContent = new Date().getFullYear();
 
       /* ---------- Data ---------- */
