@@ -1,7 +1,7 @@
 {
   "name": "Jordan Doerksen",
-  "headline": "Reliable laborer with railway, warehouse, and roofing experience.",
-  "summary": "I’m a reliable labourer with hands-on experience in rail operations, warehouse logistics, and roofing. I prioritize safety, follow procedures closely, and work well both independently and as part of a team to meet deadlines and productivity goals.",
+  "headline": "Rail conductor — CROR-qualified, safety-first, with warehouse and logistics experience.",
+  "summary": "Rail conductor with hands-on CN experience in yard switching and train operations, grounded in CROR and a safety-first, procedure-first mindset. Strong background in warehouse logistics and freight handling. I work well solo or on a crew, communicate clearly, and take real pride in doing the job right — and in helping the people around me learn to do it right and go home safe.",
   "contact": [
     { "label": "Location", "value": "Winnipeg, MB" },
     { "label": "Phone", "value": "905-259-9235" },
@@ -10,11 +10,13 @@
   "experience": [
     {
       "title": "Canadian National Railway — Conductor / Engineering Department",
-      "meta": "2023 – 2025 · Rail operations and safety-focused work",
+      "meta": "2023 – 2025 · Yard switching and train operations",
       "bullets": [
-        "Worked in rail operations with a focus on safety, teamwork, and procedure.",
-        "Held conductor and engineering department certifications.",
-        "Handled responsibilities in a high-pressure, fast-moving environment."
+        "Worked as a conductor — switched cars, built trains to outbound order, and coupled, kicked, and spotted equipment under CROR.",
+        "Lined and protected switches, gave point protection on shoves, and secured equipment with hand brakes (Rule 112), testing for effectiveness on grade.",
+        "Communicated by radio and hand signals — positive identification, distance counts, and repeat-backs — to control moves safely.",
+        "Read switch lists and followed CROR and CN operating instructions exactly in a fast-moving, all-weather, around-the-clock environment.",
+        "Held conductor and engineering-department certifications."
       ]
     },
     {
@@ -59,14 +61,39 @@
       "bullets": ["High School Diploma"]
     }
   ],
+  "projects": [
+    {
+      "title": "CN Conductor Trainer — Self-directed rail-training project",
+      "meta": "2025 – 2026 · CROR study & switching simulator",
+      "bullets": [
+        "Built a browser-based training suite modelled on CN's Grande Prairie yard: a switching / dig-out puzzle, an interactive yard map, a guided radio-call trainer, a signal-aspect reader for CROR Rules 405–440, and a 186-question CROR quiz.",
+        "Sourced every rule and signal straight from the Canadian Rail Operating Rules and had the content checked by a working CN trainer — accuracy treated as safety-critical.",
+        "Structured the quiz the way the CROR itself is laid out (definitions, switching, securing, radio, signals, OCS / ABS / CTC, interlocking) so it builds from the basics up.",
+        "Built it to keep my own CROR sharp — and to give new conductors a safe way to learn switching and the rules."
+      ]
+    },
+    {
+      "title": "Self-taught software & product building",
+      "meta": "Ongoing · Initiative and follow-through",
+      "bullets": [
+        "Taught myself to design and ship complete, polished products end to end.",
+        "Shipped a commercial desktop security utility, several browser games, and small-business websites.",
+        "Pick up new tools quickly and see a project all the way through."
+      ]
+    }
+  ],
   "skills": [
+    "CROR (Canadian Rail Operating Rules)",
+    "Yard switching & train building",
+    "Securing equipment (Rule 112)",
+    "Radio & hand signals",
+    "Rail operations",
+    "Safety procedures",
     "Warehouse operations",
     "Forklift use",
     "Pallet jack use",
     "Freight handling",
     "Order picking",
-    "Rail operations",
-    "Safety procedures",
     "Teamwork",
     "Communication",
     "First Aid",
@@ -75,7 +102,7 @@
   ],
   "interests": [
     { "title": "Music — Guitar & Composition", "desc": "Write and record music across styles; practiced instrument technique and composition." },
-    { "title": "Coding & Small Projects", "desc": "Experiment with new languages and build compact Python tools for automation and prototyping." },
+    { "title": "Coding & Small Projects", "desc": "Experiment with new languages and build compact tools for automation and prototyping." },
     { "title": "3D Modeling & Printing", "desc": "Design and print practical items like self-watering seed starters, desk organizers, and pegboard walls." },
     { "title": "Hardware Enclosures & Tooling", "desc": "Create custom cases and organizers for Raspberry Pi and audio gear; focus on fit and durability." }
   ],
