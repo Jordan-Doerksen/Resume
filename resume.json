@@ -70,7 +70,9 @@
         "Sourced every rule and signal straight from the Canadian Rail Operating Rules and had the content checked by a working CN trainer — accuracy treated as safety-critical.",
         "Structured the quiz the way the CROR itself is laid out (definitions, switching, securing, radio, signals, OCS / ABS / CTC, interlocking) so it builds from the basics up.",
         "Built it to keep my own CROR sharp — and to give new conductors a safe way to learn switching and the rules."
-      ]
+      ],
+      "link": "https://jordan-doerksen.github.io/cn-conductor-trainer/",
+      "linkLabel": "Open the trainer ↗"
     },
     {
       "title": "Self-taught software & product building",
