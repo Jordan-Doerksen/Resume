@@ -5,7 +5,7 @@
   "contact": [
     { "label": "Location", "value": "Winnipeg, MB" },
     { "label": "Phone", "value": "905-259-9235" },
-    { "label": "Email", "value": "Doerksen.Jordan@gmail.com", "href": "mailto:Doerksen.Jordan@gmail.com" }
+    { "label": "Email", "value": "doerksen.jordan@gmail.com", "href": "mailto:doerksen.jordan@gmail.com" }
   ],
   "experience": [
     {
